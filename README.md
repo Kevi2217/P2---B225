@@ -1,7 +1,13 @@
-echo "# P2---B225" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Kevi2217/P2---B225.git
-git push -u origin main
+# B225 - P2 repository
+
+Dette er er B225's repository, hvilket betyder alt kode anvendt til P2-projektet, vil blive uploaded hertil.
+
+
+# B225's Gruppemedlemmer
+- Amalie Egholm Bjerrum
+- Anders Hoff Ranum
+- Andreas Laurids Pedersen
+- Frederik Dyrup Revsbech
+- Kevin Luu
+- Mikkel Nørgaard
+- Signe Kaae Pedersen
