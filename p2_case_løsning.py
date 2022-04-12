@@ -8,3 +8,6 @@ base_dir = Path('C:\\Users\\MikkelNørgaard\\Downloads\\')
 file = base_dir / '.csv'
 
 df_a = pd.read_csv(fp_a).set_index(idx_col_a)
+
+
+# Bruh
