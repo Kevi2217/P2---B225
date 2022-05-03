@@ -2,7 +2,7 @@
 
 ### Dato: 25. Maj 2022
 
-## B225s Gruppemedlemmer
+### B225s Gruppemedlemmer
 - Amalie Egholm Bjerrum
 - Anders Hoff Ranum
 - Andreas Laurids Pedersen
