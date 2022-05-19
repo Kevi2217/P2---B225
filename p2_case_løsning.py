@@ -35,14 +35,13 @@ def createplot (t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data):
         x.append(t + 1994)
         y.append(difference_equation_solution(i, b, k, y_1, y_2, G_start) [0, 0])
     plt.style.use('seaborn-poster')
-    plt.plot(x, y, label = 'Beregnet Indenlandsk BNP')
+    plt.plot(x, y, label = 'Beregnet Indenlandsk BNP', zorder = 2)
     plt.ylabel('Y(t) i mia. kr.')
     plt.xlabel('t')
-    plt.plot(x_data , y_data , label = 'Faktisk Indenlandsk BNP')
+    plt.plot(x_data , y_data , label = 'Faktisk Indenlandsk BNP', zorder = 1)
     plt.legend(loc = 'best')
     plt.grid()
     plt.xlim(left = 1994)
-    #plt.savefig('Nationalregnskab1.png', bbox_inches='tight', dpi = 300)
     plt.show()
 
 def calculate_square (t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data) :
@@ -75,36 +74,38 @@ def least_squares (t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data):
 
 def main():
     df = read_csv()
-    t_start = 1994
+    t_start = 2003
     t_end = 2006
-    b, k = 0.757, 0.01
+    b, k = 0.507, 1.676
     y = df['Y (Indenlandsk)']
     y_1 = y[t_start - 1994] # 
     y_2 = y[t_start - 1994  + 1] # 
     G = df['G']
-    G_start = G[t_start - 1994]
-
+    G_start = calculate_mean_value(df, 'G', t_start, t_end)  #G[t_start - 1994]
+    print(G_start)
     x_data = df['t']
     y_data = y
 
-    #print(calculate_mean_value(df, 'B', 2003, 2007))
-    #print(calculate_mean_value(df, 'K', 2003, 2007))
+    #print(calculate_mean_value(df, 'B', 2003, 2006))
+    #print(calculate_mean_value(df, 'K', 2003, 2006))
 
-    createplot(t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data)
+    #createplot(t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data)
 
-    #print(least_squares(t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data))
+    print(least_squares(t_start, t_end, b, k, y_1, y_2, G_start, x_data, y_data))
     
     
-    # (34516.84125102645, 0.782, 0.01 1994 to 2006
-    # (691.1976483572992, 0.772, 0.01) 1994 to 1998
-    # (378.6360271260735, 0.757, 0.01) 1998 to 2002
-    # (224.9711285852351, 0.754, 0.9099999999999999) 2002 to 2006
+    # (28350.46365949355, 0.779, 0.01) 1995 to 2006
+    
+    # (1.6013236472161285, 0.777, 0.01) 1995 to 1998
+    # (42.55367325024625, 0.742, 0.01) 1999 to 2002
+    # (351.0692632894576, 0.738, 1.31) 2003 to 2006
 
-    print('1994 to 2006 converges towards', difference_equation_solution (100000000000, 0.782, 0.01, y[1994 - 1994], y[1994 - 1994  + 1], G[1994 - 1994]))
 
-    print('1994 to 1998 converges towards', difference_equation_solution (100000000000, 0.772, 0.01, y[1994 - 1994], y[1994 - 1994  + 1], G[1994 - 1994]))
-    print('1998 to 2002 converges towards', difference_equation_solution (100000000000, 0.757, 0.01, y[1998 - 1994], y[1998 - 1994  + 1], G [1994 - 1994]))
-    print('2002 to 2006 converges towards', difference_equation_solution (100000000000, 0.754, 0.9099999999999999, y[2002 - 1994], y[2002 - 1994  + 1], G[2002 - 1994]))
+    #print('1995 to 2006 converges towards', difference_equation_solution (100000000000, 0.779, 0.01, y[1995 - 1994], y[1995 - 1994  + 1], G[1995 - 1994]))
+
+    #print('1995 to 1999 converges towards', difference_equation_solution (100000000000, 0.777, 0.01, y[1995 - 1994], y[1995 - 1994  + 1], G[1995 - 1994]))
+    #print('1999 to 2002 converges towards', difference_equation_solution (100000000000, 0.742, 0.01, y[1999 - 1994], y[1999 - 1994  + 1], G[1999 - 1994]))
+    #print('2003 to 2006 converges towards', difference_equation_solution (100000000000, 0.738, 1.31, y[2003 - 1994], y[2003 - 1994  + 1], G[2003 - 1994]))
 
 
 if __name__ == '__main__':
